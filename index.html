@@ -5,14 +5,82 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Rest Countries</title>
 </head>
 
 <body>
 
-    
-    <script src=""></script>
+    <div id="country-details">
+
+    </div>
+
+    <div id="container">
+        <!-- <h1 id="country-name">Country Name</h1>
+            <p id="capital-name">Capital</p> -->
+    </div>
+
+
+    <script>
+        function loadData() {
+            const API_URL = "https://restcountries.eu/rest/v2/all";
+            fetch(API_URL)
+                .then(response => response.json())
+                .then(jsonData => displayData(jsonData))
+                .catch(error => alert(error));
+        }
+
+        function displayData(data) {
+            const mainContainerDiv = document.getElementById('container');
+            mainContainerDiv.classList.add('main-container');
+            data.forEach(country => {
+                const subContainer = document.createElement('div');
+                subContainer.classList.add('sub-container');
+                const countryName = country.name;
+                const capitalName = country.capital;
+
+                const countryInfo = `<a href="#">
+                    <h1 class="header">${countryName}</h1>
+        <h3 class="sub-header">${capitalName}</h3>
+        <button type="submit" onclick="loadMoreData('${countryName}');">Details</button><a href="#">`;
+                subContainer.innerHTML = countryInfo;
+                mainContainerDiv.appendChild(subContainer);
+            });
+        }
+
+        function loadMoreData(countryName) {
+
+            fetch(`https://restcountries.eu/rest/v2/name/${countryName}`)
+                .then(response => response.json())
+                .then(data => displayMoreData(data))
+                .catch(error => alert(error));
+        }
+        function displayMoreData(data) {
+            console.log(data);
+            const countryName = data[0].name;
+            const imageUrl = data[0].flag;
+            const area = data[0].area;
+            const population = data[0].population;
+
+            const moreCountryInfo = `<div>
+                <img src=${imageUrl} alt="">
+                <h1 class="header">${countryName}</h1>
+                <h3 class="sub-header">Area: ${area}</h3>
+                <h3 class="sub-header">Population: ${population}</h3></div>`;
+
+            let countryDetailsMainContainer = document.getElementById('country-details');
+            countryDetailsMainContainer.classList.add('sub-container');
+            countryDetailsMainContainer.innerHTML = moreCountryInfo;
+
+
+        }
+
+        loadData();
+
+    </script>
 </body>
 
 </html>

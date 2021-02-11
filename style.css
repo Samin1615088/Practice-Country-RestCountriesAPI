@@ -1,0 +1,58 @@
+* {
+  font-family: "PT Sans", sans-serif;
+  margin: 0;
+}
+
+body {
+  background-color: #e7f3ef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  padding: 10px;
+  margin: 20px;
+  background-color: #79bea8;
+  border: 0;
+  border-radius: 5px;
+  color: #093426;
+}
+
+.main-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 50px;
+  column-gap: 200px;
+  padding: 0 200px;
+}
+.sub-container {
+  border: 6px solid #1b8d69;
+  border-radius: 20px;
+  padding: 60px;
+  text-align: center;
+  background-color: #448d76;
+}
+
+.header {
+  color: #79bea8;
+  font-size: 2rem;
+}
+
+.sub-header {
+  color: #093426;
+  margin-top: 10px;
+}
+
+div img {
+  width: 20%;
+}
+
+#country-details {
+  margin: 100px;
+  width: 20%;
+}
+
+a {
+  text-decoration: none;
+}
